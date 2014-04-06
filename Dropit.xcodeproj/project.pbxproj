@@ -112,8 +112,6 @@
 		B6A4054118EE7969000D180B /* Dropit */ = {
 			isa = PBXGroup;
 			children = (
-				B6A4054A18EE7969000D180B /* DropitAppDelegate.h */,
-				B6A4054B18EE7969000D180B /* DropitAppDelegate.m */,
 				B6A4054D18EE7969000D180B /* Main.storyboard */,
 				B6A4055018EE7969000D180B /* DropitViewController.h */,
 				B6A4055118EE7969000D180B /* DropitViewController.m */,
@@ -126,6 +124,8 @@
 		B6A4054218EE7969000D180B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B6A4054A18EE7969000D180B /* DropitAppDelegate.h */,
+				B6A4054B18EE7969000D180B /* DropitAppDelegate.m */,
 				B6A4054318EE7969000D180B /* Dropit-Info.plist */,
 				B6A4054418EE7969000D180B /* InfoPlist.strings */,
 				B6A4054718EE7969000D180B /* main.m */,
