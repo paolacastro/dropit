@@ -7,12 +7,12 @@
 //
 
 #import "DropitViewController.h"
+#import "DropitBehavior.h"
 
-@interface DropitViewController ()
+@interface DropitViewController () <UIDynamicAnimatorDelegate>
 @property (weak, nonatomic) IBOutlet UIView *gameView;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
-@property (strong, nonatomic) UIGravityBehavior *gravity;
-@property (strong, nonatomic) UICollisionBehavior *collider;
+@property (strong, nonatomic) DropitBehavior *dropitBehavior;
 @end
 
 @implementation DropitViewController
@@ -25,25 +25,73 @@
     return _animator;
 }
 
-- (UIGravityBehavior *)gravity
+- (void) dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
 {
-    if (!_gravity) {
-        _gravity = [[UIGravityBehavior alloc] init];
-        [self.animator addBehavior:_gravity];
-    }
-    return _gravity;
+    [self removeCompletedRows];
 }
 
-- (UICollisionBehavior *)collider
+- (DropitBehavior *)dropitBehavior
 {
-    if (!_collider) {
-        _collider = [[UICollisionBehavior alloc] init];
-        _collider.translatesReferenceBoundsIntoBoundary = YES;
-        [self.animator addBehavior:_collider];
+    if (!_dropitBehavior) {
+        _dropitBehavior = [[DropitBehavior alloc] init];
+        [self.animator addBehavior:_dropitBehavior];
     }
-    return _collider;
+    return _dropitBehavior;
 }
-static const CGSize DROP_SIZE = {40, 40};
+
+- (BOOL) removeCompletedRows
+{
+    NSMutableArray *dropsToRemove = [[NSMutableArray alloc]init];
+    
+    for (CGFloat y = self.gameView.bounds.size.height-DROP_SIZE.height/2; y>0; y -=DROP_SIZE.height) {
+        BOOL rowIsComplete = YES;
+        NSMutableArray *dropsFound = [[NSMutableArray alloc] init];
+        for (CGFloat x = DROP_SIZE.width/2; x <= self.gameView.bounds.size.width-DROP_SIZE.width/2; x +=DROP_SIZE.width)
+        {
+            UIView *hitView = [self.gameView hitTest:CGPointMake(x, y) withEvent:NULL];
+            if ([hitView superview] == self.gameView) {
+                [dropsFound addObject:hitView];
+            } else {
+                rowIsComplete = NO;
+                break;
+            }
+        }
+        if (![dropsFound count]) {
+            break;
+        }
+        if (rowIsComplete) {
+            [dropsToRemove addObjectsFromArray:dropsFound];
+        }
+        
+    }
+    
+    if ([dropsToRemove count]) {
+        for (UIView *drop in dropsToRemove) {
+            [self.dropitBehavior removeItem:drop];
+        }
+        [self animateRemovingDrops:dropsToRemove];
+    }
+    
+    return NO;
+}
+
+-(void)animateRemovingDrops:(NSArray *)dropsToRemove
+{
+    [UIView animateWithDuration:1.0
+animations:^{
+    for (UIView *drop in dropsToRemove){
+        int x = (arc4random()%(int)(self.gameView.bounds.size.width*5)) - (int)self.gameView.bounds.size.width*2;
+        int y = self.gameView.bounds.size.height;
+        drop.center = CGPointMake(x, -y);
+    }
+}
+    completion:^(BOOL finished) {
+        [dropsToRemove makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }];
+}
+
+
+ static const CGSize DROP_SIZE = {40, 40};
 - (IBAction)tap:(UITapGestureRecognizer *)sender {
     [self drop];
     
@@ -61,8 +109,7 @@ static const CGSize DROP_SIZE = {40, 40};
     dropView.backgroundColor = [self randomColor];
     [self.gameView addSubview:dropView];
     
-    [self.gravity addItem:dropView];
-    [self.collider addItem:dropView];
+    [self.dropitBehavior addItem:dropView];
     
 }
 

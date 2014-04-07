@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2BF150A18F12667008ACDF2 /* DropitBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF150918F12667008ACDF2 /* DropitBehavior.m */; };
 		B6A4053C18EE7969000D180B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A4053B18EE7969000D180B /* Foundation.framework */; };
 		B6A4053E18EE7969000D180B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A4053D18EE7969000D180B /* CoreGraphics.framework */; };
 		B6A4054018EE7969000D180B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A4053F18EE7969000D180B /* UIKit.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2BF150818F12667008ACDF2 /* DropitBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropitBehavior.h; sourceTree = "<group>"; };
+		B2BF150918F12667008ACDF2 /* DropitBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropitBehavior.m; sourceTree = "<group>"; };
 		B6A4053818EE7969000D180B /* Dropit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dropit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A4053B18EE7969000D180B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B6A4053D18EE7969000D180B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +118,8 @@
 				B6A4054D18EE7969000D180B /* Main.storyboard */,
 				B6A4055018EE7969000D180B /* DropitViewController.h */,
 				B6A4055118EE7969000D180B /* DropitViewController.m */,
+				B2BF150818F12667008ACDF2 /* DropitBehavior.h */,
+				B2BF150918F12667008ACDF2 /* DropitBehavior.m */,
 				B6A4055318EE7969000D180B /* Images.xcassets */,
 				B6A4054218EE7969000D180B /* Supporting Files */,
 			);
@@ -251,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6A4055218EE7969000D180B /* DropitViewController.m in Sources */,
+				B2BF150A18F12667008ACDF2 /* DropitBehavior.m in Sources */,
 				B6A4054C18EE7969000D180B /* DropitAppDelegate.m in Sources */,
 				B6A4054818EE7969000D180B /* main.m in Sources */,
 			);
@@ -461,6 +467,7 @@
 				B6A4056C18EE7969000D180B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B6A4056D18EE7969000D180B /* Build configuration list for PBXNativeTarget "DropitTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +476,7 @@
 				B6A4056F18EE7969000D180B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
